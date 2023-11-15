@@ -1,8 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Register";
+﻿@model prjAJAX.ViewModels.MemberViewModel
+@{
+    ViewData["Title"] = "HomeWorks2";
 }
 
-<h1>Register</h1>
+<h1>HomeWorks2</h1>
+
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
@@ -11,6 +13,7 @@
                 <label for="inputName" class="form-label">姓名</label>
                 <input type="text" class="form-control" id="inputName" name="name">
             </div>
+            <div id="divName" class="alert alert-info"></div>
             <div class="mb-3">
                 <label for="inputEmail" class="form-label">電子郵件</label>
                 <input type="email" class="form-control" id="inputEmail" name="email">
@@ -31,35 +34,24 @@
 </div>
 @section Scripts{
     <script>
-        const btn = document.querySelector('#buttonSubmit');
-            const divMessage = document.querySelector('#div1');
+        const nameDiv = document.querySelector('#divName');
+        const inName = document.querySelector('#inputName');
 
-        //const name = document.querySelector('#inputName');
-        //const email = document.querySelector('#inputEmail');
-        //const age = document.querySelector('#inputAge');
-        btn.addEventListener('click', event => {
-            event.preventDefault();
+        inName.addEventListener('blur', () => {
 
-            //建立Ajax物件
-            const xhr = new XMLHttpRequest();
+            const xhr=new XMLHttpRequest();
 
-
-            //接收資料
-            xhr.addEventListener('load', () => {
-                const data = xhr.responseText;
-                divMessage.innerHTML = data;
+            xhr.addEventListener('load',()=>{
+                const  data=xhr.responseText;
+                nameDiv.innerHTML = data;
             })
-            //建立FormData物件
+
             const formData = new FormData(document.querySelector('#memberForm'));
 
-            //發出要求
-            xhr.open('POST', '@Url.Content("~/Api/register")');
-            //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            //xhr.send('name=Jack&age=30&email=Jack@company.com')
+            xhr.open('POST', '@Url.Content("~/Api/CheckAccount")');
             xhr.send(formData);
-      
-        })
+
+        });
 
     </script>
-
 }
