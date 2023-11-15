@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "HomeWorks1";
+}
+
+<h1>HomeWorks1</h1>
+
+
+<div id="div1" class="" row row-cols-1 row-cols-md-3 g-4">
+</div>
+
+@section Scripts{
+    <script src="~/datas/travel.js"></script>
+    <script>
+        console.log(spots);
+            const datas = spots.CommonFormat.Section.map(spot => {
+                const { file, stitle, xbody } = spot;
+                var srcImg=file&&file.img&&file.img[0]&&file.img[0].text;
+                return (
+                    `
+                      <div class="col">
+                          <div class="card">
+                                                 <img src="${srcImg || '未有圖片'}" class="card-img-top" alt="未有圖片">
+                          <div class="card-body">
+                            <h5 class="card-title">${stitle}</h5>
+                            <p class="card-text">${xbody}</p>                            
+                         </div>
+                     </div>
+                     </div>
+                    `
+                )
+            })
+
+        document.querySelector('#div1').innerHTML = datas.join("");
+
+
+        //let data;
+        //const s = spots.CommonFormat.Section
+        //for (let i = 0; i < s.length; i++) {
+
+        //    if (s.file && s.file.img && s.file.img[0] && s.file.img[0].text) {
+
+        //    data += `
+        //                         <div class="card" style="width: 18rem;">
+        //                                     <img class="card-img-top" alt="..." src="${spots.CommonFormat.Section[i].file.img[0].text}" >
+        //                              <div class="card-body">
+        //                                        <h5 class="card-title">${spots.CommonFormat.Section[i].stitle}</h5>
+        //                                        <p class="card-text">${spots.CommonFormat.Section[i].xbody}</p>
+        //                                <a href="#" class="btn btn-primary">Go somewhere</a>
+        //                             </div>
+        //                         </div>
+        //                        `;}
+        //                       else{
+        //        data += `
+        //                                 <div class="card" style="width: 18rem;">
+        //                                                     <img class="card-img-top" alt="..." src="http://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg" >
+        //                                      <div class="card-body">
+        //                                                <h5 class="card-title">${spots.CommonFormat.Section[i].stitle}</h5>
+        //                                                <p class="card-text">${spots.CommonFormat.Section[i].xbody}</p>
+        //                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+        //                                     </div>
+        //                                 </div>
+        //                                `
+        //                       }
+            
+        //}
+        //document.querySelector('#div1').innerHTML = data;
+
+
+
+    </script>
+}
