@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "HomeWorks3";
+}
+
+<h1>HomeWorks3</h1>
+<select name="city" id="selectCity">
+</select>
+<select name="district" id="selectDistrict">
+</select>
+<select id="selectRoad">
+</select>
+<div id="div1"></div>
+
+
+
+@section Scripts{
+    <script>
+        const selCity = document.querySelector('#selectCity');
+        const selDis = document.querySelector('#selectDistrict');
+        const selRoad = document.querySelector('#selectRoad');
+
+        loadCity();
+
+        selCity.addEventListener('change', () => {
+            loadDistrict();
+        })
+        selDis.addEventListener('change', () => {
+            loadRoad()
+        })
+        //selRoad.addEventListener('change', () => {
+        //    console.log(selRoad.value);
+        //})
+
+        async function loadCity() {
+
+            const response = await fetch('@Url.Content("~/api/Cities")');
+            const data = await response.json();           
+            const cities = data.map(city => `<option id='${city}'>${city}</option>`)
+            document.querySelector('#selectCity').innerHTML = cities.join("");
+            loadDistrict();
+        }
+        async function loadDistrict() {
+            const response = await fetch(`@Url.Content("~/api/districts")?city=${selCity.value}`);
+            const data = await response.json();          
+            const districts = data.map(districts => `<option id='${districts}'>${districts}</option>`)
+            document.querySelector('#selectDist').innerHTML = districts.join("");
+            loadRoad();
+        }
+        async function loadRoad() {
+            const response = await fetch(`@Url.Content("~/api/Road")?siteid=${selDis.value}`);
+            const data = await response.json();
+            const roads = data.map(roads => `<option id='${roads}'>${roads}</option>`)
+            document.querySelector('#selectRoad').innerHTML = roads.join("");
+        }
+
+     
+            
+    </script>
+}

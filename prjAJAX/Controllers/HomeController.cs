@@ -44,6 +44,10 @@ namespace prjAJAX.Controllers
         {
             return View();
         }
+        public IActionResult HomeWorks3()
+        {
+            return View();
+        }
 
         public IActionResult Register()
         {
@@ -53,6 +57,18 @@ namespace prjAJAX.Controllers
         {
             return View(_context.Members);
         }
+        public IActionResult Address()
+        {
+            return View();
+        }
+        public IActionResult Promise()
+        {
+            return View();
+        }
 
+        public IActionResult Fetch()
+        {
+            return View();
+        }
     }
 }
